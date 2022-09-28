@@ -4,28 +4,52 @@ import axios from "axios";
 import { useEffect } from "react";
 const Form = () => {
   const [mobilevel, setMobileVali] = useState(false);
-  const [check, setCheck] = useState(false)
+  const [check, setCheck] = useState(false);
+//  const [empty, setEmpty] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     mobile: "",
     email: "",
   });
-  // console.log(formData.mobile.length)
+  
+  
 
   useEffect(() => {
+  
+    
+    if (
+      formData.mobile.length !== 10 ||
+      formData.name.length != 0 ||
+      formData.email.length != 0 ||
+      check == false
+    ) {
+      setMobileVali(false);
+    
+    }
     if (
       formData.mobile.length == 10 &&
       formData.name.length != 0 &&
-      formData.email.length != 0 && check == true
+      formData.email.length != 0 &&
+      check == true
     ) {
       setMobileVali(true);
-      console.log(mobilevel);
-
+    
     }
+    
+    if (
+      formData.mobile.length == 0 &&
+      formData.name.length == 0 &&
+      formData.email.length == 0 
+     
+    ) {
+      setMobileVali(false)
+   //   setEmpty(false);
+      
+      
+    }
+  }, [formData.name, formData.mobile, formData.email, check]);
 
-  }, [formData.name, formData.mobile, formData.email, check])
   const handleChange = (e) => {
-
     const { id, value } = e.target;
     setFormData({ ...formData, [id]: value });
   };
@@ -46,8 +70,9 @@ const Form = () => {
           name: "",
           mobile: "",
           email: "",
-        })
-        setCheck(false)
+        });
+        setCheck(false);
+        setMobileVali(false);
       })
       .catch((err) => {
         console.log("error while post data");
@@ -55,16 +80,18 @@ const Form = () => {
   };
   const handeSubmit = (e) => {
     e.preventDefault();
-    postData()
+    postData();
+    setCheck(false);
   };
   const selectFun = () => {
-    setCheck(!check)
-    console.log(check)
-  }
+    
+    setCheck(!check);
+   // setMobileVali(check)
+    console.log(check);
+  };
   return (
     <div className="form_div">
-      <form
-      >
+      <form>
         <input
           onChange={handleChange}
           type="text"
@@ -73,6 +100,8 @@ const Form = () => {
           placeholder="Enter Name*"
         />{" "}
         <br />
+        {/* <span id="empty_error" hidden={empty==false}>Please enter name</span> */}
+        <br />
         <input
           onChange={handleChange}
           type="email"
@@ -80,6 +109,8 @@ const Form = () => {
           value={formData.email}
           placeholder="Email Id*"
         />
+        <br />
+        {/* <span id="empty_error"  hidden={empty==false}>Please enter email</span> */}
         <br />
         <input
           onChange={handleChange}
@@ -90,28 +121,28 @@ const Form = () => {
           placeholder="Mobile No*"
         />
         <br />
-        <input type="checkbox" id="checkbox" onChange={() => selectFun()} />{" "}
+        {/* <span id="empty_error"  hidden={empty==false}>Please enter mobile</span> */}
+        <br />
+        <input
+          type="checkbox"
+          id="checkbox"
+          checked={check}
+          onChange={() => selectFun()}
+        />{" "}
         <label className="term_cond">
           I Agree to the <a id="term_cond">Terms & Conditions</a>{" "}
         </label>
         <br />
         <button
-          disabled={ mobilevel?false:true}
+        
+          disabled={mobilevel === false  }
 
-          className={mobilevel?"colorback":"disabled"}
-          
+          className={mobilevel ? "colorback" : "disabled"}
           onClick={handeSubmit}
-
           id="submit"
         >
           Get A Quick Quote
         </button>
-        {/* <input disabled={setFormData ==false}
-          className="createUser"
-          type="submit"
-          id="submit"
-          value={"Get A Quick Quote"}
-        /> */}
       </form>
     </div>
   );
