@@ -4,33 +4,32 @@ import axios from "axios";
 import { useEffect } from "react";
 const Form = () => {
   const [mobilevel, setMobileVali] = useState(false);
+  const [check, setCheck] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
     mobile: "",
     email: "",
   });
+  // console.log(formData.mobile.length)
 
+  useEffect(() => {
+    if (
+      formData.mobile.length == 10 &&
+      formData.name.length != 0 &&
+      formData.email.length != 0 && check == true
+    ) {
+      setMobileVali(true);
+      console.log(mobilevel);
+
+    }
+
+  }, [formData.name, formData.mobile, formData.email, check])
   const handleChange = (e) => {
-   
+
     const { id, value } = e.target;
     setFormData({ ...formData, [id]: value });
   };
-  const handeSubmit = (e) => {
-      e.preventDefault();
-      console.log("btn clicked")
-    // if (
-    //   formData.mobile.length == 10 &&
-    //   formData.name != "" &&
-    //   formData.email !== ""
-    // ) {
-    //   setMobileVali(true);
-    //   console.log(mobilevel);
-    //   postData();
-    //   setMobileVali(false);
-    // }
-    console.log("data", formData);
 
-  };
   const postData = () => {
     axios({
       url: "http://localhost:8000/formData",
@@ -43,24 +42,28 @@ const Form = () => {
     })
       .then((res) => {
         console.log(res.data);
+        setFormData({
+          name: "",
+          mobile: "",
+          email: "",
+        })
+        setCheck(false)
       })
       .catch((err) => {
         console.log("error while post data");
       });
   };
-  if (
-    formData.mobile.length == 10 &&
-    formData.name != "" &&
-    formData.email != ""
-  ) {
-    setMobileVali(true);
-    console.log(mobilevel);
+  const handeSubmit = (e) => {
+    e.preventDefault();
     postData()
-    setMobileVali(false);
+  };
+  const selectFun = () => {
+    setCheck(!check)
+    console.log(check)
   }
   return (
     <div className="form_div">
-      <form //onSubmit={handeSubmit}
+      <form
       >
         <input
           onChange={handleChange}
@@ -87,14 +90,18 @@ const Form = () => {
           placeholder="Mobile No*"
         />
         <br />
-        <input type="checkbox" id="checkbox" />{" "}
+        <input type="checkbox" id="checkbox" onChange={() => selectFun()} />{" "}
         <label className="term_cond">
           I Agree to the <a id="term_cond">Terms & Conditions</a>{" "}
         </label>
         <br />
         <button
+          disabled={ mobilevel?false:true}
+
+          className={mobilevel?"colorback":"disabled"}
+          
           onClick={handeSubmit}
-       disabled={setFormData!==true}
+
           id="submit"
         >
           Get A Quick Quote

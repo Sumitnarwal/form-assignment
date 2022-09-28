@@ -38,3 +38,11 @@
 #term_cond {
   border-bottom: 1px solid blue;
 }
+.colorback{
+  background-color: orangered;
+  color: black;
+}
+.disabled{
+  background-color: rgba(255, 166, 0, 0.774);
+  color: gray;
+}
