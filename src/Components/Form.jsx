@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../css/form.css";
+import "../css/form.css"
 import axios from "axios";
 import { useEffect } from "react";
 const Form = () => {
@@ -15,8 +15,6 @@ const Form = () => {
   
 
   useEffect(() => {
-  
-    
     if (
       formData.mobile.length !== 10 ||
       formData.name.length != 0 ||

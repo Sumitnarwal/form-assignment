@@ -1,32 +1,59 @@
 import { Formik, useFormik } from "formik";
 import React from "react";
 import { signpchema } from "../schemas";
+import "../css/formik.css"
+import axios from "axios";
+
 
 const initialValues = {
   name: "",
   email: "",
+  mobile:"",
   password: "",
   confirm_password: "",
 };
 
 const Register = () => {
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormik({
-      initialValues: initialValues,
-      validationSchema: signpchema,
-      onSubmit: (values) => {
-        console.log(values);
-        action.resetForm();
+  const {
+    action,
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+  } = useFormik({
+    initialValues: initialValues,
+    validationSchema: signpchema,
+    onSubmit: (values,action) => {
+      console.log(values);
+      postData(values)
+      action.resetForm();
+    },
+  });
+  const postData = (values) => {
+    axios({
+      url: "http://localhost:8000/formData",
+      method: "POST",
+      data: {
+        name: values.name,
+        Email: values.email,
       },
-      
-    });
+    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log("error while post data");
+      });
+  };
   return (
-    <div>
+    <div className="form_div1">
       <form onSubmit={handleSubmit}>
         <div className="input-block">
           <label htmlFor="name" className="input-lable">
             Name
-          </label>
+          </label><br/>
           <input
             type={"name"}
             autoComplete="off"
@@ -43,7 +70,7 @@ const Register = () => {
           <br />
           <label htmlFor="name" className="input-lable">
             Email
-          </label>
+          </label><br/>
           <input
             type={"email"}
             autoComplete="off"
@@ -59,8 +86,25 @@ const Register = () => {
           ) : null}
           <br />
           <label htmlFor="name" className="input-lable">
+            Mobile
+          </label><br/>
+          <input
+             type="tel"
+             maxLength={"10"}
+            autoComplete="off"
+            name="mobile"
+            id="mobile"
+            placeholder="Mobile"
+            value={values.mobile}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />{" "}
+          {errors.mobile && touched.mobile ? (
+            <p className="form-error">{errors.mobile}</p>
+          ) : null}
+          <label htmlFor="name" className="input-lable">
             Password
-          </label>
+          </label><br/>
           <input
             type={"password"}
             autoComplete="off"
@@ -77,7 +121,7 @@ const Register = () => {
           <br />
           <label htmlFor="name" className="input-lable">
             Conform-Password
-          </label>
+          </label><br/>
           <input
             type={"password"}
             autoComplete="off"
@@ -93,7 +137,7 @@ const Register = () => {
           ) : null}
         </div>
         <div className="model-buttons">
-          <a href="#" className="">
+          <a href="/" className="alt_line">
             Want to rigister using Gmail
           </a>
           <br />
