@@ -1,14 +1,13 @@
 import { Formik, useFormik } from "formik";
 import React from "react";
 import { signpchema } from "../schemas";
-import "../css/formik.css"
+import "../css/formik.css";
 import axios from "axios";
-
 
 const initialValues = {
   name: "",
   email: "",
-  mobile:"",
+  mobile: "",
   password: "",
   confirm_password: "",
 };
@@ -25,9 +24,9 @@ const Register = () => {
   } = useFormik({
     initialValues: initialValues,
     validationSchema: signpchema,
-    onSubmit: (values,action) => {
+    onSubmit: (values, action) => {
       console.log(values);
-      postData(values)
+      postData(values);
       action.resetForm();
     },
   });
@@ -53,7 +52,8 @@ const Register = () => {
         <div className="input-block">
           <label htmlFor="name" className="input-lable">
             Name
-          </label><br/>
+          </label>
+          <br />
           <input
             type={"name"}
             autoComplete="off"
@@ -70,7 +70,8 @@ const Register = () => {
           <br />
           <label htmlFor="name" className="input-lable">
             Email
-          </label><br/>
+          </label>
+          <br />
           <input
             type={"email"}
             autoComplete="off"
@@ -87,10 +88,11 @@ const Register = () => {
           <br />
           <label htmlFor="name" className="input-lable">
             Mobile
-          </label><br/>
+          </label>
+          <br />
           <input
-             type="tel"
-             maxLength={"10"}
+            type="tel"
+            maxLength={"10"}
             autoComplete="off"
             name="mobile"
             id="mobile"
@@ -102,9 +104,11 @@ const Register = () => {
           {errors.mobile && touched.mobile ? (
             <p className="form-error">{errors.mobile}</p>
           ) : null}
+          <br />
           <label htmlFor="name" className="input-lable">
             Password
-          </label><br/>
+          </label>
+          <br />
           <input
             type={"password"}
             autoComplete="off"
@@ -121,7 +125,8 @@ const Register = () => {
           <br />
           <label htmlFor="name" className="input-lable">
             Conform-Password
-          </label><br/>
+          </label>
+          <br />
           <input
             type={"password"}
             autoComplete="off"

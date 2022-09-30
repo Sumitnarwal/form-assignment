@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../css/form.css"
 import axios from "axios";
 import { useEffect } from "react";
+import bcrypt from "bcryptjs";
 const Form = () => {
   const [mobilevel, setMobileVali] = useState(false);
   const [check, setCheck] = useState(false);
@@ -53,12 +54,15 @@ const Form = () => {
   };
 
   const postData = () => {
+      const getMobile=formData.mobile
+      const hashedPassword = bcrypt.hashSync(getMobile, 10);
+      console.log(hashedPassword);
     axios({
       url: "http://localhost:8000/formData",
       method: "POST",
       data: {
         name: formData.name,
-        Mobile: formData.mobile,
+        Mobile: hashedPassword,
         Email: formData.email,
       },
     })
