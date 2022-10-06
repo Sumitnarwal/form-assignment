@@ -129,7 +129,7 @@ const Form = () => {
             style={{width:"80%"}}
             type="tel"
             id="mobile"
-            maxLength={"12"}
+            maxLength={"11"}
             value={value}
             onChange={(e) => handlePhoneNo(e)}
           />
