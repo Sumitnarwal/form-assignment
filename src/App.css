@@ -1,0 +1,67 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.Navbar {
+  width: 70%;
+  height: 60px;
+  display: flex;
+  margin: auto;
+  background-color: black;
+  color: white;
+  padding: 1rem;
+  text-align: right;
+  gap: 1.5rem;
+  padding-left: 50%;
+}
+.Register {
+  text-decoration: none;
+  color: white;
+  margin-top: 25px;
+}
+.Login {
+  text-decoration: none;
+  color: white;
+}
+.top_value {
+  font-size: 25px;
+  width: 20%;
+  margin-bottom: 20px;
+  margin: auto;
+  border-bottom: 2px solid black;
+}

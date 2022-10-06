@@ -1,0 +1,45 @@
+.form_div1 {
+  border: 1px solid rgb(200, 184, 184);
+  width: 50%;
+  margin: auto;
+  margin-top: 2rem;
+  height: 100%;
+  padding: 1rem;
+  padding-left: 5rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  border-radius: 1rem;
+  text-align: left;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+#name,
+#email,
+#mobile,
+#password,
+#confirm_password {
+  border: 1px solid rgb(198, 193, 193);
+  width: 80%;
+  height: 40px;
+  /* margin-top: 0.4rem; */
+  padding-left: 10px;
+}
+.alt_line {
+  margin-top: 2rem;
+}
+.input-button {
+  width: 80%;
+  margin-top: 20px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  color: white;
+  font-size: 18px;
+  background-color: #98dcf2;
+}
+.form-error {
+  font-size: 12px;
+  color: rgb(227, 25, 25);
+  margin-bottom: 0%;
+}
